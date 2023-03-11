@@ -1,7 +1,8 @@
 package com.yamlgameswap.back.controller;
 
 import com.yamlgameswap.back.entity.result.Result;
-import com.yamlgameswap.back.entity.user.DanmuInfo;
+import com.yamlgameswap.back.entity.user.danmu.DanmuInfo;
+import com.yamlgameswap.back.entity.user.user.UserInfo;
 import com.yamlgameswap.back.enums.WorkEnum;
 import com.yamlgameswap.back.service.works.UserService;
 import com.yamlgameswap.back.service.works.factory.ServiceFactory;
@@ -17,15 +18,20 @@ import java.util.Map;
 
 @Slf4j(topic = "controller.User")
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/api/user")
 public class UserController {
 
     @Autowired
     private ServiceFactory serviceFactory;
 
-    // 注册
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Result<Map<String, String>> login(HttpServletRequest request, @RequestBody UserInfo userInfo) {
+        return ((UserService) serviceFactory.getService(WorkEnum.USERSERVICE.getService())).login(userInfo, request);
+    }
+
+    // 弹幕
     @RequestMapping(value = "/danmu", method = RequestMethod.POST)
-    public Result<Map<String, String>> reginster(HttpServletRequest request, @RequestBody DanmuInfo danmuInfo) {
+    public Result<Map<String, String>> danmu(HttpServletRequest request, @RequestBody DanmuInfo danmuInfo) {
         return ((UserService) serviceFactory.getService(WorkEnum.USERSERVICE.getService())).addDanmu(danmuInfo, request);
     }
 

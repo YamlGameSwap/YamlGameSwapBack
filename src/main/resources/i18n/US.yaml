@@ -1,4 +1,5 @@
 Language:
+  login_success: login success
   email_repeat: fate money
   subtitle: sub fate money
   redis_is_null: redis_is_null

@@ -2,10 +2,10 @@ package com.yamlgameswap.back.service.common;
 
 import com.yamlgameswap.back.entity.except.DefinitionException;
 import com.yamlgameswap.back.entity.result.Result;
-import com.yamlgameswap.back.enums.ErrorEnum;
-import com.yamlgameswap.back.enums.StatusEnum;
+import com.yamlgameswap.back.enums.MessageEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +20,9 @@ import java.util.Map;
 @ControllerAdvice
 public class ExceptionService {
 
+    @Value("${redis.languagekey}")
+    private String languagekey;
+
     @Autowired
     private ResultService resultService;
 
@@ -32,14 +35,14 @@ public class ExceptionService {
     @ExceptionHandler(value = DefinitionException.class)
     @ResponseBody
     public Result DefineExceptionHandler(DefinitionException e) {
-        String errorTag = ErrorEnum.getCodeMsgMap().get(e.getErrorCode());
+        String errorTag = MessageEnum.getCodeMsgMap().get(e.getErrorCode());
         Result<Map<String, String>> result = resultService.getFail();
         result.setCode(e.getErrorCode());
         try {
-            result.setMessage(redisService.getResponseMsg("yamlgameswap_" + e.getLanguage(), errorTag));
+            result.setMessage(redisService.getResponseMsg(languagekey + e.getLanguage(), errorTag));
         } catch (Exception exception) {
             log.error("error:", exception);
-            result.setMessage(redisService.getResponseMsg("yamlgameswap_" + e.getLanguage(), ErrorEnum.ip_repeat_reginster.getValue()));
+            result.setMessage(redisService.getResponseMsg(languagekey + e.getLanguage(), MessageEnum.ip_repeat_reginster.getValue()));
         }
 
         result.setData(null);

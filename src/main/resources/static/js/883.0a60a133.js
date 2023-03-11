@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkdivination"]=self["webpackChunkdivination"]||[]).push([[883],{3883:function(n,l,u){u.r(l),u.d(l,{default:function(){return s}});var i=function(){var n=this,l=n._self._c;return l("div",[n._v(" hello world ")])},t=[],e=u(3736),r={},o=(0,e.Z)(r,i,t,!1,null,null,null),s=o.exports}}]);
+//# sourceMappingURL=883.0a60a133.js.map

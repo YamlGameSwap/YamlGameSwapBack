@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yamlgameswap.back.mapper.user.UserMapper">
+    <resultMap type="com.yamlgameswap.back.entity.user.user.UserEntity" id="userEntity">
+        <result property="id" column="id"/>
+        <result property="userAddress" column="userAddress"/>
+        <result property="userToken" column="userToken"/>
+        <result property="password" column="password"/>
+    </resultMap>
+
+    <select id="findUserInfoByAddress" resultMap="userEntity">
+        select * from user where
+        userAddress = #{userAddress}
+    </select>
+
+    <select id="findUserInfoByToken" resultMap="userEntity">
+        select * from user where
+        userAddress = #{userToken}
+    </select>
+
+    <insert id="insertUser">
+        insert into user (userAddress,userToken,password)
+        values (#{userAddress},#{userToken},#{password})
+    </insert>
+
+</mapper>

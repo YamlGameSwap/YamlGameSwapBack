@@ -27,6 +27,9 @@ public class MultiLanguageModule implements moduleInter {
 
     @Value("${multilanguage}")
     private List<String> multiLangiage;
+
+    @Value("${redis.languagekey}")
+    private String languagekey;
     @Autowired
     private RedisService redisService;
 
@@ -63,7 +66,7 @@ public class MultiLanguageModule implements moduleInter {
 
     public void storeRedis() {
         for (String language : languageData.keySet()) {
-            redisService.setMap("yamlgameswap_" + language, languageData.get(language));
+            redisService.setMap(languagekey + language, languageData.get(language));
         }
     }
 }

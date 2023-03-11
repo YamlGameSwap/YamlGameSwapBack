@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yamlgameswap.back.mapper.user.DanmuMapper">
+    <resultMap type="com.yamlgameswap.back.entity.user.danmu.DanmuEntity" id="danmuEntity">
+        <result property="id" column="id"/>
+        <result property="userToken" column="userToken"/>
+        <result property="bookToken" column="bookToken"/>
+        <result property="sectionToken" column="sectionToken"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+
+    <select id="findSectionAllDanmus" resultMap="danmuEntity">
+        select * from danmu where
+        sectionToken = #{sectionToken}
+    </select>
+
+    <select id="findSectionUserDanmus" resultMap="danmuEntity">
+        select * from danmu where
+        sectionToken = #{sectionToken} and userToken = #{userToken}
+    </select>
+
+</mapper>
