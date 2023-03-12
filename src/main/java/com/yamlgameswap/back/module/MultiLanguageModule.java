@@ -28,7 +28,7 @@ public class MultiLanguageModule implements moduleInter {
     @Value("${multilanguage}")
     private List<String> multiLangiage;
 
-    @Value("${redis.languagekey}")
+    @Value("${redis.languageKey}")
     private String languagekey;
     @Autowired
     private RedisService redisService;

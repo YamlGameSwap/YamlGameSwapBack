@@ -5,40 +5,39 @@ import java.util.Map;
 
 public enum MessageEnum {
     // 成功
-    login_success(2001, "login_success", 2001), // 登录成功
-    //异常
-    user_login_fail(7, "user_reginster_fail", 300), // 用户登录失败
-    user_data_error_reginster(2, "user_data_error_reginster", 300), // 用户数据格式错误 注册/修改用户数据的时候
-    ip_repeat_reginster(1, "ip_repeat_reginster", 429), // ip 重复
-    language_type_error(3, "language_type_error", 300),// 语言错误
-    redis_is_null(8, "redis_is_null", 400),// redis 没有该字段
-    token_is_null(10, "token_is_null", 3005),// user token 为空
-    token_is_error(11, "token_is_error", 3006),//user token is error
+    login_success(1, "login_success", 2001), // 登录成功
+    // 拦截器异常
+    language_type_error(2, "language_type_error", 4002),// 语言错误
+    redis_is_null(2, "redis_is_null", 4003),// redis 没有该字段
+    ip_repeat_reginster(2, "ip_repeat_reginster", 4004), // ip 重复
+    token_is_null(2, "token_is_null", 4005),// user token 为空
+    token_is_error(2, "token_is_error", 4006),//user token is error
+    // 逻辑异常
+    user_login_fail(3, "user_reginster_fail", 3001), // 用户登录失败
+    user_data_error_reginster(3, "user_data_error_reginster", 3002), // 用户数据格式错误 注册/修改用户数据的时候
     ;
 
-    private final Integer code;
+    private final Integer typeCode;
     private final String value;
     private final Integer responseCode;
-    private static final Map<Integer, String> codeMsg = new HashMap<>();
-    private static final Map<Integer, Integer> codeResponseCode = new HashMap<>();
+    private static final Map<Integer, String> responseCodeMsg = new HashMap<>();
 
     static {
         MessageEnum[] messageEnums = MessageEnum.values();
         for (MessageEnum messageEnum : messageEnums) {
-            codeMsg.put(messageEnum.getCode(), messageEnum.getValue());
-            codeResponseCode.put(messageEnum.getCode(), messageEnum.getResponseCode());
+            responseCodeMsg.put(messageEnum.getResponseCode(), messageEnum.getValue());
         }
     }
 
 
-    MessageEnum(Integer code, String value, Integer responseCode) {
-        this.code = code;
+    MessageEnum(Integer typeCode, String value, Integer responseCode) {
+        this.typeCode = typeCode;
         this.value = value;
         this.responseCode = responseCode;
     }
 
-    public Integer getCode() {
-        return this.code;
+    public Integer getTypeCode() {
+        return this.typeCode;
     }
 
     public String getValue() {
@@ -49,12 +48,8 @@ public enum MessageEnum {
         return this.responseCode;
     }
 
-    public static Map<Integer, Integer> getCodeResponseMap() {
-        return codeResponseCode;
-    }
-
-    public static Map<Integer, String> getCodeMsgMap() {
-        return codeMsg;
+    public static Map<Integer, String> getResponseCodeMsgMap() {
+        return responseCodeMsg;
     }
 
 }

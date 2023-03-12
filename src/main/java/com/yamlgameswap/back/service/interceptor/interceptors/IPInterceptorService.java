@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class IPInterceptorService extends HandlerInterceptorAdapter {
 
-    @Value("${redis.languagekey}")
+    @Value("${redis.languageKey}")
     private String languagekey;
 
     @Autowired
@@ -48,10 +48,10 @@ public class IPInterceptorService extends HandlerInterceptorAdapter {
             }catch (Exception e){
                 DefinitionException definitionException = new DefinitionException();
                 definitionException.setLanguage(language);
-                definitionException.setErrorCode(MessageEnum.redis_is_null.getCode());
+                definitionException.setErrorCode(MessageEnum.redis_is_null.getResponseCode());
                 throw definitionException;
             }
-            result.setCode(MessageEnum.ip_repeat_reginster.getCode());
+            result.setCode(MessageEnum.ip_repeat_reginster.getResponseCode());
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().print(JSON.toJSONString(result));
             return false;

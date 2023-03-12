@@ -57,7 +57,7 @@ public class TokenInterceptorService extends HandlerInterceptorAdapter {
     public void getLanguageInvalidResult(String language, MessageEnum errorTag, HttpServletResponse response) throws IOException {
         Result result = resultService.getFail();
         result.setMessage(redisService.getResponseMsg(languagekey + language, errorTag.getValue()));
-        result.setCode(errorTag.getCode());
+        result.setCode(errorTag.getResponseCode());
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(JSON.toJSONString(result));
     }

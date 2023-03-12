@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j(topic = "service.UserService")
 public class UserService implements ServiceInter {
 
-    @Value("${redis.languagekey}")
+    @Value("${redis.languageKey}")
     private String languagekey;
 
     @Autowired
@@ -57,7 +57,7 @@ public class UserService implements ServiceInter {
 
             DefinitionException definitionException = new DefinitionException();
             definitionException.setLanguage(language);
-            definitionException.setErrorCode(MessageEnum.user_data_error_reginster.getCode());
+            definitionException.setErrorCode(MessageEnum.user_data_error_reginster.getResponseCode());
             throw definitionException;
         }
 
@@ -120,7 +120,7 @@ public class UserService implements ServiceInter {
             }
             DefinitionException definitionException = new DefinitionException();
             definitionException.setLanguage(language);
-            definitionException.setErrorCode(MessageEnum.user_login_fail.getCode());
+            definitionException.setErrorCode(MessageEnum.user_login_fail.getResponseCode());
             throw definitionException;
         }
 

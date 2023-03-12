@@ -20,7 +20,7 @@ import java.util.Map;
 @ControllerAdvice
 public class ExceptionService {
 
-    @Value("${redis.languagekey}")
+    @Value("${redis.languageKey}")
     private String languagekey;
 
     @Autowired
@@ -35,7 +35,7 @@ public class ExceptionService {
     @ExceptionHandler(value = DefinitionException.class)
     @ResponseBody
     public Result DefineExceptionHandler(DefinitionException e) {
-        String errorTag = MessageEnum.getCodeMsgMap().get(e.getErrorCode());
+        String errorTag = MessageEnum.getResponseCodeMsgMap().get(e.getErrorCode());
         Result<Map<String, String>> result = resultService.getFail();
         result.setCode(e.getErrorCode());
         try {

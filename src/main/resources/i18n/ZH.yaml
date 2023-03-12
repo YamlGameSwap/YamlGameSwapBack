@@ -9,3 +9,4 @@ Language:
   redis_is_null: redis没有该字段
   token_is_null: user token 为空
   token_is_error: user token 错误
+  auth_is_error: 认证失败

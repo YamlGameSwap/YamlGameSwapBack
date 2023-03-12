@@ -23,8 +23,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(authInterceptorService)
-//                .addPathPatterns("/**");
+        registry.addInterceptor(authInterceptorService)
+                .addPathPatterns("/api/**");
 
         registry.addInterceptor(languageInterceptorService)
                 .addPathPatterns("/api/**");

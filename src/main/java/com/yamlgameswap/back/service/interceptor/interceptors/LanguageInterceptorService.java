@@ -47,7 +47,7 @@ public class LanguageInterceptorService extends HandlerInterceptorAdapter {
     public void getLanguageInvalidResult(HttpServletResponse response) throws IOException {
         Result result = resultService.getFail();
         result.setMessage("language is invalid");
-        result.setCode(MessageEnum.language_type_error.getCode());
+        result.setCode(MessageEnum.language_type_error.getResponseCode());
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().print(JSON.toJSONString(result));
     }
