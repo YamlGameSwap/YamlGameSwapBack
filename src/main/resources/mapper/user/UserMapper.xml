@@ -16,7 +16,7 @@
 
     <select id="findUserInfoByToken" resultMap="userEntity">
         select * from user where
-        userAddress = #{userToken}
+        userToken = #{userToken}
     </select>
 
     <insert id="insertUser">

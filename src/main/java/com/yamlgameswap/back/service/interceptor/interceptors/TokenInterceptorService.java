@@ -45,7 +45,7 @@ public class TokenInterceptorService extends HandlerInterceptorAdapter {
             return false;
         }
 
-        UserEntity userEntity = userMapper.findUserInfoByAddress(userToken);
+        UserEntity userEntity = userMapper.findUserInfoByToken(userToken);
         if (userEntity == null) {
             getLanguageInvalidResult(language, MessageEnum.token_is_error, response);
             return false;

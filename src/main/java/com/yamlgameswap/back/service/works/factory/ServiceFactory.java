@@ -2,6 +2,7 @@ package com.yamlgameswap.back.service.works.factory;
 
 import com.yamlgameswap.back.enums.WorkEnum;
 import com.yamlgameswap.back.service.works.NullService;
+import com.yamlgameswap.back.service.works.SpaceService;
 import com.yamlgameswap.back.service.works.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class ServiceFactory {
     private NullService nullService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private SpaceService spaceService;
 
     public static Map<Integer, ServiceInter> serviceMap = new HashMap<>();
 
@@ -24,6 +27,7 @@ public class ServiceFactory {
     private void init() {
         serviceMap.put(WorkEnum.NULLSERVICE.getService(), nullService);
         serviceMap.put(WorkEnum.USERSERVICE.getService(), userService);
+        serviceMap.put(WorkEnum.SPACESERVICE.getService(), spaceService);
     }
 
     public ServiceInter getService(Integer service) {

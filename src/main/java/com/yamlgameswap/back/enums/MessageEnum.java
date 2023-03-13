@@ -13,8 +13,13 @@ public enum MessageEnum {
     token_is_null(2, "token_is_null", 4005),// user token 为空
     token_is_error(2, "token_is_error", 4006),//user token is error
     // 逻辑异常
+    // user
+    // 登入
     user_login_fail(3, "user_reginster_fail", 3001), // 用户登录失败
     user_data_error_reginster(3, "user_data_error_reginster", 3002), // 用户数据格式错误 注册/修改用户数据的时候
+    // space
+    space_error(3, "space_error", 3003),
+    space_detail_error(3, "space_detail_error", 3004),
     ;
 
     private final Integer typeCode;
