@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yamlgameswap.back.mapper.book.BookMapper">
+    <resultMap type="com.yamlgameswap.back.entity.book.book.BookEntity" id="BookEntity">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="intro" column="intro"/>
+        <result property="twitter" column="twitter"/>
+        <result property="telegram" column="telegram"/>
+        <result property="discord" column="discord"/>
+        <result property="website" column="website"/>
+        <result property="tokenName" column="tokenName"/>
+        <result property="tokenContract" column="tokenContract"/>
+    </resultMap>
+
+    <sql id="book_content">
+        <if test="bookType != null or bookType !=''">
+            and bookType = #{bookType}
+        </if>
+
+        <if test="contentType != null or contentType !=''">
+            and contentType = #{contentType}
+        </if>
+    </sql>
+
+    <sql id="limit">
+         limit #{offset},#{limit}
+    </sql>
+
+    <select id="getBookCount" resultType="int">
+        select count(*) from
+
+        <if test="spaceToken == null or spaceToken ==''">
+            Book where 1=1
+            <if test="userToken != null or usToken != ''">
+                and userToken = #{userToken}
+            </if>
+        </if>
+
+        <include refid="book_content"></include>
+
+    </select>
+
+    <select id="getSpaceBookCount" resultType="int">
+        select count(*) from
+
+        BookSpace where spaceToken = #{spaceToken}
+        <if test="userToken != null or usToken != ''">
+            and userToken = #{userToken}
+        </if>
+
+        <include refid="book_content"></include>
+    </select>
+
+    <select id="getBooksEntity" resultMap="BookEntity">
+        select * from
+
+        <if test="spaceToken == null or spaceToken ==''">
+            Book where 1=1
+            <if test="userToken != null or usToken != ''">
+                and userToken = #{userToken}
+            </if>
+        </if>
+
+        <include refid="book_content"></include>
+        <include refid="limit"></include>
+    </select>
+
+    <select id="getSpaceBooksEntity" resultMap="BookEntity">
+        select * from
+
+        Book b
+
+        join SpaceBook s
+
+        on s.spaceToken = #{spaceToken}
+        <if test="userToken != null or usToken != ''">
+            and s.userToken = #{userToken}
+        </if>
+
+        and s.bookToken = b.bookToken
+
+        <if test="bookType != null or bookType !=''">
+            and b.bookType = #{bookType}
+        </if>
+
+        <if test="contentType != null or contentType !=''">
+            and b.contentType = #{contentType}
+        </if>
+
+        <include refid="limit"></include>
+    </select>
+
+    <select id="getBookDetail" resultMap="BookEntity">
+        select * from Book
+        where bookToken = #{bookToken}
+    </select>
+
+
+</mapper>

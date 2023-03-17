@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yamlgameswap.back.mapper.space.SpaceFollowMapper">
+    <resultMap type="com.yamlgameswap.back.entity.space.follow.SpaceFollowEntity" id="FollowEntity">
+        <result property="id" column="id"/>
+        <result property="spaceToken" column="spaceToken"/>
+        <result property="userToken" column="userToken"/>
+    </resultMap>
+
+    <select id="getFollowBySpaceToken" resultType="int">
+        select count(*) from spaceFollow where
+        spaceToken = #{spaceToken};
+    </select>
+
+</mapper>

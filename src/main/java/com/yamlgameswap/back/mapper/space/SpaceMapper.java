@@ -12,9 +12,9 @@ import java.util.List;
 @Mapper
 @Repository
 public interface SpaceMapper {
-    int getCount();
+    int getCount(@Param("userToken") String userToken);
 
     SpaceEntity getSpaceDetail(@Param("spaceToken") String spaceToken);
 
-    List<SpaceEntity> getSpaces(@Param("offset") int offset, @Param("limit") int limit);
+    List<SpaceEntity> getSpaces(@Param("userToken") String userToken, @Param("offset") int offset, @Param("limit") int limit);
 }

@@ -4,6 +4,7 @@ public enum WorkEnum {
     NULLSERVICE(0),
     USERSERVICE(1),
     SPACESERVICE(2),
+    BOOKSERVICE(3),
     ;
 
     private final Integer service;

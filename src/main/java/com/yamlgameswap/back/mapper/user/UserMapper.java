@@ -17,4 +17,6 @@ public interface UserMapper {
     UserEntity findUserInfoByToken(@Param("userToken") String userToken);
 
     int insertUser(UserInfo userInfo);
+
+    String getAddressByUserToken(@Param("userToken") String userToken);
 }

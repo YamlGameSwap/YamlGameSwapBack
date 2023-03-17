@@ -24,4 +24,9 @@
         values (#{userAddress},#{userToken},#{password})
     </insert>
 
+    <select id="getAddressByUserToken" resultType="String">
+        select address from user where
+        userToken = #{userToken}
+    </select>
+
 </mapper>

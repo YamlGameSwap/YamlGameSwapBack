@@ -10,4 +10,7 @@ public class SpaceInfo {
 
     @JsonProperty(value = "space_token")
     private String spaceToken;
+
+    @JsonProperty(value = "user_token")
+    private String userToken;
 }

@@ -29,10 +29,4 @@ public class UserController {
         return ((UserService) serviceFactory.getService(WorkEnum.USERSERVICE.getService())).login(userInfo, request);
     }
 
-    // 弹幕
-    @RequestMapping(value = "/danmu", method = RequestMethod.POST)
-    public Result<Map<String, String>> danmu(HttpServletRequest request, @RequestBody DanmuInfo danmuInfo) {
-        return ((UserService) serviceFactory.getService(WorkEnum.USERSERVICE.getService())).addDanmu(danmuInfo, request);
-    }
-
 }

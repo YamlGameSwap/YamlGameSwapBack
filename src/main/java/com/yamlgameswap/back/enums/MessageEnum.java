@@ -6,6 +6,10 @@ import java.util.Map;
 public enum MessageEnum {
     // 成功
     login_success(1, "login_success", 2001), // 登录成功
+    spaces_get_success(1, "spaces_get", 2002),
+    space_detail_get_success(1, "spaces_get", 2003),
+    book_get_success(1, "book_get_success", 2004),
+    book_detail_get_success(1, "book_detail_get_success", 2005),
     // 拦截器异常
     language_type_error(2, "language_type_error", 4002),// 语言错误
     redis_is_null(2, "redis_is_null", 4003),// redis 没有该字段
@@ -20,6 +24,9 @@ public enum MessageEnum {
     // space
     space_error(3, "space_error", 3003),
     space_detail_error(3, "space_detail_error", 3004),
+    // book
+    book_error(3, "book_error", 3005),
+    book_detail_error(3, "book_detail_error", 3006),
     ;
 
     private final Integer typeCode;

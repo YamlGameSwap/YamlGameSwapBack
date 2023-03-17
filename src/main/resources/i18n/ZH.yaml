@@ -12,3 +12,5 @@ Language:
   auth_is_error: 认证失败
   space_error: 获取 space 信息失败
   space_detail_error: 获取 space 具体信息失败
+  book_error: 数据获取失败
+  book_detail_error: 获取书籍具体信息失败

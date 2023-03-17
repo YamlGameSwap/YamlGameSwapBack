@@ -16,11 +16,18 @@
     </resultMap>
 
     <select id="getCount" resultType="int">
-        select count(*) from space;
+        select count(*) from space where 1=1
+        <if test="userToken != null and userToken != ''">
+            and userToken = #{userToken}
+        </if>
     </select>
 
     <select id="getSpaces" resultMap="SpaceEntity">
-        select * from space limit #{offset},#{limit}
+        select * from space where 1=1
+        <if test="userToken != null and userToken != ''">
+            and userToken = #{userToken}
+        </if>
+        limit #{offset},#{limit}
     </select>
 
     <select id="getSpaceDetail" resultMap="SpaceEntity">

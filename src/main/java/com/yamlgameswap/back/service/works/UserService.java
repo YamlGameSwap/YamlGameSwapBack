@@ -158,20 +158,6 @@ public class UserService implements ServiceInter {
         return result;
     }
 
-    /**
-     * 检测数据库中该章节的弹幕是否超过 3 条
-     */
-    public Result<Map<String, String>> addDanmu(DanmuInfo danmuInfo, HttpServletRequest request) {
-        String userToken = request.getHeader("userToken");
-        List<DanmuEntity> danmuEntityList = danmuMapper.findSectionUserDanmus(danmuInfo.getSectionToken(), userToken);
-
-        Result<Map<String, String>> result = new Result<>();
-        result.setCode(200);
-        result.setMessage("success");
-        result.setStatus(StatusEnum.SUCCESS.getStatus());
-        return result;
-    }
-
     public Result<Map<String, String>> addComment(DanmuInfo danmuInfo, HttpServletRequest request) {
         Result<Map<String, String>> result = new Result<>();
         result.setCode(200);

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j(topic = "controller.Space")
@@ -20,8 +21,8 @@ public class SpaceController {
     private ServiceFactory serviceFactory;
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public Result<Map<Integer, SpaceResult>> get(HttpServletRequest request, @RequestParam("page") Integer page) {
-        return ((SpaceService) serviceFactory.getService(WorkEnum.SPACESERVICE.getService())).getSpace(page, request);
+    public Result<List<SpaceResult>> get(HttpServletRequest request, @RequestParam(required = false, name = "user_token") String userToken, @RequestParam("page") Integer page) {
+        return ((SpaceService) serviceFactory.getService(WorkEnum.SPACESERVICE.getService())).getSpace(userToken, page, request);
     }
 
     @RequestMapping(value = "/getSpaceDetail", method = RequestMethod.GET)
