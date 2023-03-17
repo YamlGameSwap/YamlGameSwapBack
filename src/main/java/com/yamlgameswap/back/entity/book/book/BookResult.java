@@ -19,6 +19,9 @@ public class BookResult {
     private String discord;
     private String website;
 
+    private int bookType;
+    private int contentType;
+
     private String token_name;
     private String token_contract;
 

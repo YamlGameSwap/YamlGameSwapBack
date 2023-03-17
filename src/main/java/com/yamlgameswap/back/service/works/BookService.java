@@ -18,7 +18,9 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j(topic = "service.BookService")
@@ -36,11 +38,11 @@ public class BookService implements ServiceInter {
     @Autowired
     private UserMapper userMapper;
 
-    public Result<List<BookResult>> getBook(
+    public Result<Map<String, Object>> getBook(
             String spaceToken,
             String userToken,
-            int bookType,
-            int contentType,
+            Integer bookType,
+            Integer contentType,
             int page,
             HttpServletRequest request
     ) {
@@ -94,16 +96,25 @@ public class BookService implements ServiceInter {
 
             if (bookEntityList.size() > 0) {
                 List<BookResult> bookResultList = getBookResultListByEntity(bookEntityList);
-                Result<List<BookResult>> result = new Result<>();
+                Result<Map<String, Object>> result = new Result<>();
+                Map<String, Object> resultMap = new HashMap<>();
                 result.setCode(MessageEnum.book_get_success.getResponseCode());
                 result.setMessage("success");
-                result.setData(bookResultList);
+                resultMap.put("count", count);
+                resultMap.put("data", bookResultList);
+                result.setData(resultMap);
                 result.setStatus(StatusEnum.SUCCESS.getStatus());
                 return result;
             } else {
                 throw new Exception("没有数据");
             }
         } catch (Exception e) {
+            if (e.getMessage().equals("没有数据") || e.getMessage().equals("未知参数") || e.getMessage().equals("页码不对")
+            ) {
+                ;
+            } else {
+                log.error("error: ", e);
+            }
             DefinitionException definitionException = new DefinitionException();
             definitionException.setLanguage(language);
             definitionException.setErrorCode(MessageEnum.book_error.getResponseCode());
@@ -162,6 +173,9 @@ public class BookService implements ServiceInter {
             bookResult.setDiscord(bookEntity.getDiscord());
             bookResult.setTelegram(bookEntity.getTelegram());
             bookResult.setWebsite(bookEntity.getWebsite());
+
+            bookResult.setBookType(bookEntity.getBookType());
+            bookResult.setContentType(bookEntity.getContentType());
             bookResult.setBook_banner_url(bookEntity.getBookBannerUrl());
             bookResult.setBook_token(bookEntity.getBookToken());
             bookResult.setToken_name(bookEntity.getTokenName());

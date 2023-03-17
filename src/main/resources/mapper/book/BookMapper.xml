@@ -15,11 +15,11 @@
     </resultMap>
 
     <sql id="book_content">
-        <if test="bookType != null or bookType !=''">
+        <if test="bookType != null and bookType != 0">
             and bookType = #{bookType}
         </if>
 
-        <if test="contentType != null or contentType !=''">
+        <if test="contentType != null and contentType != 0">
             and contentType = #{contentType}
         </if>
     </sql>
@@ -31,11 +31,10 @@
     <select id="getBookCount" resultType="int">
         select count(*) from
 
-        <if test="spaceToken == null or spaceToken ==''">
-            Book where 1=1
-            <if test="userToken != null or usToken != ''">
-                and userToken = #{userToken}
-            </if>
+        Book where 1=1
+
+        <if test="(userToken != null) and (userToken != '')">
+            and userToken = #{userToken}
         </if>
 
         <include refid="book_content"></include>
@@ -45,22 +44,32 @@
     <select id="getSpaceBookCount" resultType="int">
         select count(*) from
 
-        BookSpace where spaceToken = #{spaceToken}
-        <if test="userToken != null or usToken != ''">
-            and userToken = #{userToken}
+        SpaceBook s
+
+        join Book b
+
+        where s.spaceToken = #{spaceToken}
+
+        <if test="userToken != null and userToken != ''">
+            and b.userToken = #{userToken}
         </if>
 
-        <include refid="book_content"></include>
+        <if test="bookType != null and bookType !=''">
+            and b.bookType = #{bookType}
+        </if>
+
+        <if test="contentType != null and contentType !=''">
+            and b.contentType = #{contentType}
+        </if>
+
     </select>
 
     <select id="getBooksEntity" resultMap="BookEntity">
         select * from
 
-        <if test="spaceToken == null or spaceToken ==''">
-            Book where 1=1
-            <if test="userToken != null or usToken != ''">
-                and userToken = #{userToken}
-            </if>
+        Book where 1=1
+        <if test="userToken != null and userToken != ''">
+            and userToken = #{userToken}
         </if>
 
         <include refid="book_content"></include>
@@ -75,17 +84,18 @@
         join SpaceBook s
 
         on s.spaceToken = #{spaceToken}
-        <if test="userToken != null or usToken != ''">
-            and s.userToken = #{userToken}
+
+        <if test="userToken != null and userToken != ''">
+            and b.userToken = #{userToken}
         </if>
 
         and s.bookToken = b.bookToken
 
-        <if test="bookType != null or bookType !=''">
+        <if test="bookType != null and bookType !=''">
             and b.bookType = #{bookType}
         </if>
 
-        <if test="contentType != null or contentType !=''">
+        <if test="contentType != null and contentType !=''">
             and b.contentType = #{contentType}
         </if>
 

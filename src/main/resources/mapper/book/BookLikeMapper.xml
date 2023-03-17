@@ -9,7 +9,7 @@
     <select id="getBookLike" resultType="int">
         select count(*) from
 
-        getBookLike
+        BookLike
 
         where bookToken = #{bookToken}
 

@@ -24,19 +24,22 @@ public class BookController {
     private ServiceFactory serviceFactory;
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public Result<List<BookResult>> get(
+    public Result<Map<String, Object>> get(
             HttpServletRequest request,
             @RequestParam(required = false, name = "space_token") String spaceToken,
             @RequestParam(required = false, name = "user_token") String userToken,
-            @RequestParam(required = false, name = "book_type") int bookType,
-            @RequestParam(required = false, name = "content_type") int contentType,
+            @RequestParam(required = false, name = "book_type") Integer bookType,
+            @RequestParam(required = false, name = "content_type") Integer contentType,
             @RequestParam("page") Integer page
     ) {
         return ((BookService) serviceFactory.getService(WorkEnum.BOOKSERVICE.getService())).getBook(spaceToken, userToken, bookType, contentType, page, request);
     }
 
     @RequestMapping(value = "/getBookDetail", method = RequestMethod.GET)
-    public Result<BookResult> getBookDetail(HttpServletRequest request, @RequestParam("book_token") String bookToken) {
+    public Result<BookResult> getBookDetail(
+            HttpServletRequest request,
+            @RequestParam("book_token") String bookToken
+    ) {
         return ((BookService) serviceFactory.getService(WorkEnum.BOOKSERVICE.getService())).getBookDetail(bookToken, request);
     }
 }

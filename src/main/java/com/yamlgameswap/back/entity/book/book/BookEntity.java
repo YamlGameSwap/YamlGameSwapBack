@@ -10,7 +10,7 @@ public class BookEntity {
     private String intro;
     private int chainId;
     private int bookType; // 小说，游戏本等
-    private int contentType; // 内容类型 推理，恐怖，爱情
+    private int contentType; // 内容类型 推理，恐怖，爱情c
 
 
     // 媒体
@@ -23,7 +23,7 @@ public class BookEntity {
     private String tokenContract;
 
     private String bookToken;
-    private String createToken;
+    private String userToken;
 
     private String BookImageUrl;
     private String BookBannerUrl;

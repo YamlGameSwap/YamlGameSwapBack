@@ -25,7 +25,7 @@
     </insert>
 
     <select id="getAddressByUserToken" resultType="String">
-        select address from user where
+        select userAddress from user where
         userToken = #{userToken}
     </select>
 

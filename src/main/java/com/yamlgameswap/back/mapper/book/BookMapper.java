@@ -1,7 +1,6 @@
 package com.yamlgameswap.back.mapper.book;
 
 import com.yamlgameswap.back.entity.book.book.BookEntity;
-import com.yamlgameswap.back.entity.space.space.SpaceEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -13,32 +12,32 @@ import java.util.List;
 public interface BookMapper {
     int getBookCount(
             @Param("userToken") String userToken,
-            @Param("bookType") int bookType,
-            @Param("contentType") int contentType
+            @Param("bookType") Integer bookType,
+            @Param("contentType") Integer contentType
     );
 
     int getSpaceBookCount(
-            @Param("userToken") String spaceToken,
+            @Param("spaceToken") String spaceToken,
             @Param("userToken") String userToken,
-            @Param("bookType") int bookType,
-            @Param("contentType") int contentType
+            @Param("bookType") Integer bookType,
+            @Param("contentType") Integer contentType
     );
 
     BookEntity getBookDetail(@Param("bookToken") String bookToken);
 
     List<BookEntity> getBooksEntity(
             @Param("userToken") String userToken,
-            @Param("bookType") int bookType,
-            @Param("contentType") int contentType,
+            @Param("bookType") Integer bookType,
+            @Param("contentType") Integer contentType,
             @Param("offset") int offset,
             @Param("limit") int limit
     );
 
     List<BookEntity> getSpaceBooksEntity(
-            @Param("userToken") String spaceToken,
+            @Param("spaceToken") String spaceToken,
             @Param("userToken") String userToken,
-            @Param("bookType") int bookType,
-            @Param("contentType") int contentType,
+            @Param("bookType") Integer bookType,
+            @Param("contentType") Integer contentType,
             @Param("offset") int offset,
             @Param("limit") int limit
     );
